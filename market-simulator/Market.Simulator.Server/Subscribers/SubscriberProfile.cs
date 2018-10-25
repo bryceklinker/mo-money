@@ -8,8 +8,8 @@ namespace Market.Simulator.Server.Subscribers
     {
         public SubscriberProfile()
         {
-            CreateMap<Subscriber, SubscriberModel>();
-            CreateMap<SubscriberModel, Subscriber>();
+            CreateMap<Subscriber, SubscriberModel>()
+                .ReverseMap();
         }
     }
 }

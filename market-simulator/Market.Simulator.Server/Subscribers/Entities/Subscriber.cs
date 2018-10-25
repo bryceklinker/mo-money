@@ -10,12 +10,11 @@ namespace Market.Simulator.Server.Subscribers.Entities
         public string Url { get; set; }
     }
     
-    public class SubscriberConfiguration : IEntityTypeConfiguration<Subscriber>
+    public class SubscriberConfiguration : EntityTypeConfiguration<Subscriber>
     {
-        public void Configure(EntityTypeBuilder<Subscriber> builder)
+        public override void ConfigureProperties(EntityTypeBuilder<Subscriber> builder)
         {
-            builder.HasKey(e => e.Id);
-            builder.Property(p => p.Name).IsRequired().HasMaxLength(250);
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(MaxStringLength);
             builder.Property(p => p.Url).IsRequired();
         }
     }

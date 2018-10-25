@@ -32,7 +32,8 @@ namespace Market.Simulator.Client.Common
         {
             using (var client = CreateClient())
             {
-                var json = await client.GetStringAsync(path).ConfigureAwait(false);
+                var response = await client.GetAsync(path).ConfigureAwait(false);
+                var json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(json);
             }
         }

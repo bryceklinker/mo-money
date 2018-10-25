@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Market.Simulator.Client;
 using Market.Simulator.Models.Subscribers;
@@ -15,13 +14,13 @@ namespace Market.Simulator.Tests
         public RegisterSubscriberTests(MarketServerFixture fixture)
         {
             _client = new MarketSimulatorClient(fixture.BaseUrl);
-            ClearSubscribers().Wait();
+            fixture.ResetData();
         }
 
         [Fact]
         public async Task ShouldSubscribeToSimulator()
         {
-            var id = await _client.SubscribeAsync(new SubscriberModel
+            var id = await _client.AddSubscriberAsync(new SubscriberModel
             {
                 Name = "New Listener",
                 Url = "https://localhost:4000/listening"
@@ -37,8 +36,8 @@ namespace Market.Simulator.Tests
         [Fact]
         public async Task ShouldHaveTwoSubscribers()
         {
-            await _client.SubscribeAsync(new SubscriberModel {Name = "Bob", Url = "https://localhost/"});
-            var id = await _client.SubscribeAsync(new SubscriberModel
+            await _client.AddSubscriberAsync(new SubscriberModel {Name = "Bob", Url = "https://localhost/"});
+            var id = await _client.AddSubscriberAsync(new SubscriberModel
             {
                 Name = "Jack",
                 Url = "https://localhost:3200/bob"
@@ -54,7 +53,7 @@ namespace Market.Simulator.Tests
         [Fact]
         public async Task ShouldUpdateExistingSubscriber()
         {
-            var id = await _client.SubscribeAsync(new SubscriberModel
+            var id = await _client.AddSubscriberAsync(new SubscriberModel
             {
                 Name = "Bill",
                 Url = "https://localhost:5421/receiver"
@@ -69,15 +68,6 @@ namespace Market.Simulator.Tests
             var subscriber = await _client.GetSubscriberAsync(id);
             Assert.Equal("IDK", subscriber.Name);
             Assert.Equal("https://localhost:5894/receiving", subscriber.Url);
-        }
-
-        private async Task ClearSubscribers()
-        {
-            var models = await _client.GetSubscribersAsync();
-            foreach (var model in models)
-            {
-                await _client.DeleteSubscriberAsync(model.Id);
-            }
         }
     }
 }

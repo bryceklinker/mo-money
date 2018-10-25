@@ -20,10 +20,10 @@ namespace Market.Simulator.Server.Subscribers
     
     public class SubscribersService : ISubscribersService
     {
-        private readonly SimulatorContext _context;
+        private readonly IContext _context;
         private readonly IMapper _mapper;
 
-        public SubscribersService(SimulatorContext context, IMapper mapper)
+        public SubscribersService(IContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -31,21 +31,21 @@ namespace Market.Simulator.Server.Subscribers
 
         public async Task<SubscriberModel> Add(SubscriberModel model)
         {
-            var entry = _context.Add(_mapper.Map<Subscriber>(model));
-            await _context.SaveChangesAsync();
-            return _mapper.Map<SubscriberModel>(entry.Entity);
+            var entity = _context.Add(_mapper.Map<Subscriber>(model));
+            await _context.SaveAsync();
+            return _mapper.Map<SubscriberModel>(entity);
         }
 
         public async Task<SubscriberModel[]> GetAll()
         {
-            return await _context.Set<Subscriber>()
+            return await _context.GetAll<Subscriber>()
                 .ProjectTo<SubscriberModel>(_mapper.ConfigurationProvider)
                 .ToArrayAsync();
         }
 
         public async Task<SubscriberModel> GetById(long id)
         {
-            return await _context.Set<Subscriber>()
+            return await _context.GetAll<Subscriber>()
                 .Where(s => s.Id == id)
                 .ProjectTo<SubscriberModel>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
@@ -53,17 +53,17 @@ namespace Market.Simulator.Server.Subscribers
 
         public async Task Update(long id, SubscriberModel model)
         {
-            var subscriber = await _context.Set<Subscriber>().SingleAsync(s => s.Id == id);
+            var subscriber = await _context.GetAll<Subscriber>().SingleAsync(s => s.Id == id);
             subscriber.Name = model.Name;
             subscriber.Url = model.Url;
-            await _context.SaveChangesAsync();
+            await _context.SaveAsync();
         }
 
         public async Task DeleteAsync(long id)
         {
-            var subscriber = await _context.Set<Subscriber>().SingleAsync(s => s.Id == id);
+            var subscriber = await _context.GetAll<Subscriber>().SingleAsync(s => s.Id == id);
             _context.Remove(subscriber);
-            await _context.SaveChangesAsync();
+            await _context.SaveAsync();
         }
     }
 }

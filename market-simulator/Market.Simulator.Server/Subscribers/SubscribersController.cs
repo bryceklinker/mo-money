@@ -22,7 +22,7 @@ namespace Market.Simulator.Server.Subscribers
             return Ok(models);
         }
 
-        [HttpGet("{id:long}", Name = "GetById")]
+        [HttpGet("{id:long}", Name = "GetSubscriberById")]
         public async Task<IActionResult> GetById(long id)
         {
             var model = await _service.GetById(id);
@@ -33,7 +33,7 @@ namespace Market.Simulator.Server.Subscribers
         public async Task<IActionResult> Register([FromBody] SubscriberModel model)
         {
             var newModel = await _service.Add(model);
-            return CreatedAtRoute("GetById", new {id = newModel.Id}, newModel);
+            return CreatedAtRoute("GetSubscriberById", new {id = newModel.Id}, newModel);
         }
 
         [HttpPut("{id:long}")]
