@@ -38,6 +38,7 @@ Task("Test")
                         .Append("--no-restore")
                         .Append("/p:CollectCoverage=true")
                         .Append("/p:CoverletOutputFormat=cobertura")
+                        .Append($"/p:CoverletOutput=../../coverage/{project.GetFilenameWithoutExtension()}.cobertura.xml")
                         .Append("--logger trx"),
                 });
         }
@@ -45,8 +46,11 @@ Task("Test")
     
 Task("CoverageReport")
     .Does(() => {
-        var reports = "./market-simulator/Market.Simulator.Tests/coverage.cobertura.xml";
-        ReportGenerator(reports, "./coverage", new ReportGeneratorSettings
+        var projects = GetFiles("./**/*.Tests.csproj");
+        var reports = projects
+            .Select(f => $"./coverage/{f.GetFilenameWithoutExtension()}.cobertura.xml")
+            .ToArray();
+        ReportGenerator(string.Join(";", reports), "./coverage", new ReportGeneratorSettings
         {
             ReportTypes = new []
             {

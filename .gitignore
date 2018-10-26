@@ -4,3 +4,5 @@
 **/tools/
 **/TestResults/
 **/*.cobertura.xml
+**/[Cc]overage/
+**/.DS_Store
