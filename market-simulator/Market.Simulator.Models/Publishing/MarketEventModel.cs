@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Market.Simulator.Models.Publishing
@@ -13,6 +14,7 @@ namespace Market.Simulator.Models.Publishing
         {
         }
 
+        [JsonConstructor]
         public MarketEventModel(MetadataModel metadata, JObject payload)
         {
             Metadata = metadata;
