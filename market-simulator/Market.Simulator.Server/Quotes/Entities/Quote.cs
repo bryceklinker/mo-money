@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Market.Simulator.Server.Quotes.Entities
 {
-    public class Quote : Entity
+    public class Quote : IEntity
     {
+        public long Id { get; set; }
         public DateTimeOffset Timestamp { get; set; }
         public decimal Price { get; set; }
-        
+
         public virtual Company Company { get; set; }
     }
     

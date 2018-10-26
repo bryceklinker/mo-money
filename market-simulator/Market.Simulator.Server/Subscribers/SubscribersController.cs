@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Market.Simulator.Models.Subscribers;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +45,7 @@ namespace Market.Simulator.Server.Subscribers
         [HttpDelete("{id:long}")]
         public async Task<IActionResult> Delete(long id)
         {
-            await _service.DeleteAsync(id);
+            await _service.Delete(id);
             return NoContent();
         }
     }

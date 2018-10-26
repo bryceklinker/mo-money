@@ -24,6 +24,7 @@ namespace Market.Simulator.Tests
         [Fact]
         public async Task ShouldPublishQuotesToSubscribers()
         {
+            await _marketSimulatorClient.AddCompanyAsync("Microsoft");
             await _marketSimulatorClient.AddSubscriberAsync("Testing", _fakeMarketSubscriber.SubscriberUrl.AbsoluteUri);
             await Task.Delay(1000);
             Assert.True(_fakeMarketSubscriber.MarketEvents.Length > 1);

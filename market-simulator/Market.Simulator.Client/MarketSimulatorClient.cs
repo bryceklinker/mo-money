@@ -59,7 +59,12 @@ namespace Market.Simulator.Client
 
         public async Task<long> AddCompanyAsync(string name)
         {
-            var response = await _client.PostAsync("/companies", new CompanyModel {Name = name});
+            return await AddCompanyAsync(new CompanyModel {Name = name});
+        }
+
+        public async Task<long> AddCompanyAsync(CompanyModel model)
+        {
+            var response = await _client.PostAsync("/companies", model);
             return long.TryParse(response.Headers.Location.Segments.Last(), out var id)
                 ? id
                 : default(long);
@@ -73,6 +78,16 @@ namespace Market.Simulator.Client
         public async Task DeleteCompanyAsync(long id)
         {
             await _client.DeleteAsync($"/companies/{id}");
+        }
+
+        public async Task UpdateCompanyAsync(long id, CompanyModel model)
+        {
+            await _client.PutAsync($"/companies/{id}", model);
+        }
+
+        public async Task<CompanyModel> GetCompanyAsync(long id)
+        {
+            return await _client.GetAsync<CompanyModel>($"/companies/{id}");
         }
     }
 }

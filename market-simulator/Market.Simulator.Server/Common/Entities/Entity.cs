@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Market.Simulator.Server.Common.Entities
 {
-    public class Entity
+    public interface IEntity
     {
-        public long Id { get; set; }
+        long Id { get; set; }
     }
     
     public abstract class EntityTypeConfiguration<T> : IEntityTypeConfiguration<T>
-        where T : Entity
+        where T : class, IEntity
     {
         public const int MaxStringLength = 256;
         

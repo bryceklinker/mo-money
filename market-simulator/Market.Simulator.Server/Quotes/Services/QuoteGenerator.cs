@@ -24,9 +24,9 @@ namespace Market.Simulator.Server.Quotes.Services
             _random = new Random();
         }
 
-        public Task<Quote[]> GenerateQuotes()
+        public async Task<Quote[]> GenerateQuotes()
         {
-            return _context.GetAll<Company>()
+            return await _context.GetAll<Company>()
                 .Select(c => new Quote
                 {
                     Timestamp = DateTimeOffset.UtcNow,

@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Market.Simulator.Server.Subscribers.Entities
 {
-    public class Subscriber : Entity
+    public class Subscriber : IEntity
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }

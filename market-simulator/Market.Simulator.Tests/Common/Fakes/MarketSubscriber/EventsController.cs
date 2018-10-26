@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber
 {
-    [Route("[controller]")]
+    [Route("events")]
     public class EventsController : Controller
     {
         private readonly FakeMarketSubscriber _subscriber;
@@ -14,7 +14,7 @@ namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber
         }
 
         [HttpPost("incoming")]
-        public IActionResult Receive([FromBody] MarketEventModel marketEvent)
+        public IActionResult Incoming([FromBody] MarketEventModel marketEvent)
         {
             _subscriber.AddMarketEvent(marketEvent);
             return Accepted();

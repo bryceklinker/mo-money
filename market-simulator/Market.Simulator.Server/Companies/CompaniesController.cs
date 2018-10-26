@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Market.Simulator.Models.Companies;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +22,10 @@ namespace Market.Simulator.Server.Companies
         }
 
         [HttpGet("{id:long}", Name = "GetCompanyById")]
-        public Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(long id)
         {
-            throw new NotImplementedException();
+            var model = await _service.GetById(id);
+            return Ok(model);
         }
         
         [HttpPost]
@@ -33,6 +33,13 @@ namespace Market.Simulator.Server.Companies
         {
             var newModel = await _service.Add(model);
             return CreatedAtRoute("GetCompanyById", new {id = newModel.Id}, newModel);
+        }
+
+        [HttpPut("{id:long}")]
+        public async Task<IActionResult> Update(long id, [FromBody] CompanyModel model)
+        {
+            await _service.Update(id, model);
+            return NoContent();
         }
 
         [HttpDelete("{id:long}")]

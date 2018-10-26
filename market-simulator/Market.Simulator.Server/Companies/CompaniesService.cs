@@ -4,6 +4,7 @@ using AutoMapper.QueryableExtensions;
 using Market.Simulator.Models.Companies;
 using Market.Simulator.Server.Common;
 using Market.Simulator.Server.Common.Entities;
+using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Companies.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,38 +15,20 @@ namespace Market.Simulator.Server.Companies
         Task<CompanyModel> Add(CompanyModel model);
         Task<CompanyModel[]> GetAll();
         Task Delete(long id);
+        Task<CompanyModel> GetById(long id);
+        Task Update(long id, CompanyModel model);
     }
 
-    public class CompaniesService : ICompaniesService
+    public class CompaniesService : EntitiesService<Company, CompanyModel>, ICompaniesService
     {
-        private readonly IContext _context;
-        private readonly IMapper _mapper;
-
         public CompaniesService(IContext context, IMapper mapper)
+            : base(context, mapper)
         {
-            _context = context;
-            _mapper = mapper;
         }
 
-        public async Task<CompanyModel> Add(CompanyModel model)
+        protected override void UpdateEntity(Company entity, CompanyModel model)
         {
-            var entity = _context.Add(_mapper.Map<Company>(model));
-            await _context.SaveAsync();
-            return _mapper.Map<CompanyModel>(entity);
-        }
-
-        public async Task<CompanyModel[]> GetAll()
-        {
-            return await _context.GetAll<Company>()
-                .ProjectTo<CompanyModel>(_mapper.ConfigurationProvider)
-                .ToArrayAsync();
-        }
-
-        public async Task Delete(long id)
-        {
-            var entity = await _context.GetAll<Company>().SingleAsync(c => c.Id == id);
-            _context.Remove(entity);
-            await _context.SaveAsync();
+            entity.Name = model.Name;
         }
     }
 }

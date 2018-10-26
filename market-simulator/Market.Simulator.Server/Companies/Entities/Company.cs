@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Market.Simulator.Server.Companies.Entities
 {
-    public class Company : Entity
+    public class Company : IEntity
     {
+        public long Id { get; set; }
         public string Name { get; set; }
-        
+
         public virtual ICollection<Quote> Quotes { get; set; }
     }
     

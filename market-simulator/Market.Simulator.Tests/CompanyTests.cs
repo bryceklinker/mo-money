@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Market.Simulator.Client;
+using Market.Simulator.Models.Companies;
 using Market.Simulator.Tests.Common;
 using Xunit;
 
@@ -36,6 +37,19 @@ namespace Market.Simulator.Tests
 
             var companies = await _client.GetCompaniesAsync();
             Assert.Equal(2, companies.Length);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateExistingCompany()
+        {
+            var id = await _client.AddCompanyAsync("Bill");
+            await _client.UpdateCompanyAsync(id, new CompanyModel
+            {
+                Name = "New Hotness"
+            });
+
+            var company = await _client.GetCompanyAsync(id);
+            Assert.Equal("New Hotness", company.Name);
         }
     }
 }
