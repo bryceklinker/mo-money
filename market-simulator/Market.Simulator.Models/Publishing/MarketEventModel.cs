@@ -9,8 +9,8 @@ namespace Market.Simulator.Models.Publishing
         public MetadataModel Metadata { get; }
         public JObject Payload { get; }
 
-        public MarketEventModel(object payload)
-            : this(CreateMetadata(payload), JObject.FromObject(payload))
+        public MarketEventModel(object payload, MarketEventType? marketEventType = null)
+            : this(CreateMetadata(payload, marketEventType), JObject.FromObject(payload))
         {
         }
 
@@ -23,12 +23,12 @@ namespace Market.Simulator.Models.Publishing
 
         public T PayloadAs<T>() => Payload.ToObject<T>();
 
-        private static MetadataModel CreateMetadata(object payload)
+        private static MetadataModel CreateMetadata(object payload, MarketEventType? marketEventType = null)
         {
             return new MetadataModel
             {
                 Timestamp = DateTimeOffset.UtcNow,
-                EventType = payload.ToMarketEventType()
+                EventType = marketEventType ?? payload.ToMarketEventType()
             };
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Market.Simulator.Client;
+using Market.Simulator.Models.Publishing;
 using Market.Simulator.Models.Quotes;
 using Market.Simulator.Tests.Common;
 using Market.Simulator.Tests.Common.Fakes.MarketSubscriber;
@@ -16,10 +17,10 @@ namespace Market.Simulator.Tests
 
         public PublishQuotesTests(MarketServerFixture fixture)
         {
-            fixture.ResetData();
+            fixture.Reset();
 
-            _marketSimulatorClient = new MarketSimulatorClient(fixture.BaseUrl);
-            _fakeMarketSubscriber = new FakeMarketSubscriber();
+            _marketSimulatorClient = fixture.CreateClient();
+            _fakeMarketSubscriber = fixture.AddFakeSubscriber();
         }
 
         [Fact]
@@ -28,8 +29,9 @@ namespace Market.Simulator.Tests
             await _marketSimulatorClient.AddCompanyAsync("Microsoft");
             await _marketSimulatorClient.AddSubscriberAsync("Testing", _fakeMarketSubscriber.SubscriberUrl.AbsoluteUri);
             await Task.Delay(1500);
-            Assert.NotEmpty(_fakeMarketSubscriber.MarketEvents);
-            Assert.All(_fakeMarketSubscriber.MarketEvents, m => Assert.Equal("Microsoft", m.PayloadAs<QuoteModel>().CompanyName));
+
+            var quotes = _fakeMarketSubscriber.GetMarketEvents(MarketEventType.NewQuote);
+            Assert.All(quotes, m => Assert.Equal("Microsoft", m.PayloadAs<QuoteModel>().CompanyName));
         }
 
         public void Dispose()

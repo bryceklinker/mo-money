@@ -6,3 +6,4 @@
 **/*.cobertura.xml
 **/[Cc]overage/
 **/.DS_Store
+**/*.user

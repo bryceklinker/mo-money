@@ -40,7 +40,7 @@ namespace Market.Simulator.Server.Quotes.Publishing
 
             var publishTasks = quotes
                 .Select(_mapper.Map<QuoteModel>)
-                .Select(_eventPublisher.Publish);
+                .Select(q => _eventPublisher.Publish(q));
             await Task.WhenAll(publishTasks);
         }
     }

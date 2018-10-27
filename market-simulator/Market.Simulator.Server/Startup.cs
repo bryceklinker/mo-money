@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
 
 namespace Market.Simulator.Server
 {
@@ -28,7 +29,9 @@ namespace Market.Simulator.Server
             services.AddTransient<IMarketEventPublisher, MarketEventPublisher>();
             services.AddTransient<IQuotesPublisher, QuotesPublisher>();
             services.AddHostedService<QuotePublishingBackgroundService>();
-            services.AddHttpClient();
+            services.AddHttpClient()
+                .AddHttpClient(MarketEventPublisher.HttpClientName)
+                .AddTransientHttpErrorPolicy(p => p.RetryAsync(3));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +41,6 @@ namespace Market.Simulator.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
         }
     }

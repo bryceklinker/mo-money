@@ -1,12 +1,9 @@
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Market.Simulator.Models.Subscribers;
 using Market.Simulator.Server.Common;
 using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Subscribers.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Market.Simulator.Server.Subscribers
 {

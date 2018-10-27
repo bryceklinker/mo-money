@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Market.Simulator.Client;
 using Market.Simulator.Models.Subscribers;
@@ -13,18 +14,15 @@ namespace Market.Simulator.Tests
 
         public RegisterSubscriberTests(MarketServerFixture fixture)
         {
-            _client = new MarketSimulatorClient(fixture.BaseUrl);
-            fixture.ResetData();
+            fixture.Reset();
+
+            _client = fixture.CreateClient();
         }
 
         [Fact]
         public async Task ShouldSubscribeToSimulator()
         {
-            var id = await _client.AddSubscriberAsync(new SubscriberModel
-            {
-                Name = "New Listener",
-                Url = "https://localhost:4000/listening"
-            });
+            var id = await _client.AddSubscriberAsync("New Listener", "https://localhost:4000/listening");
 
             var listeners = await _client.GetSubscribersAsync();
             Assert.Single(listeners);
@@ -36,28 +34,21 @@ namespace Market.Simulator.Tests
         [Fact]
         public async Task ShouldHaveTwoSubscribers()
         {
-            await _client.AddSubscriberAsync(new SubscriberModel {Name = "Bob", Url = "https://localhost/"});
-            var id = await _client.AddSubscriberAsync(new SubscriberModel
-            {
-                Name = "Jack",
-                Url = "https://localhost:3200/bob"
-            });
+            await _client.AddSubscriberAsync("Bob", "https://localhost/");
+            var id = await _client.AddSubscriberAsync("Jack", "https://localhost:3200/bob");
            
-            var listeners = await _client.GetSubscribersAsync();
-            Assert.Equal(2, listeners.Length);
-            Assert.Equal(id, listeners[1].Id);
-            Assert.Equal("Jack", listeners[1].Name);
-            Assert.Equal("https://localhost:3200/bob", listeners[1].Url);
+            var subscribers = await _client.GetSubscribersAsync();
+            Assert.Equal(2, subscribers.Length);
+            var subscriber = subscribers.Single(s => s.Id == id);
+            Assert.Equal(id, subscriber.Id);
+            Assert.Equal("Jack", subscriber.Name);
+            Assert.Equal("https://localhost:3200/bob", subscriber.Url);
         }
 
         [Fact]
         public async Task ShouldUpdateExistingSubscriber()
         {
-            var id = await _client.AddSubscriberAsync(new SubscriberModel
-            {
-                Name = "Bill",
-                Url = "https://localhost:5421/receiver"
-            });
+            var id = await _client.AddSubscriberAsync("Bill", "https://localhost:5421/receiver");
 
             await _client.UpdateSubscriberAsync(id, new SubscriberModel
             {

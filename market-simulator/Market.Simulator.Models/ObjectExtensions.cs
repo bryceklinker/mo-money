@@ -8,7 +8,7 @@ namespace Market.Simulator.Models
         public static MarketEventType ToMarketEventType(this object instance)
         {
             if (instance is QuoteModel)
-                return MarketEventType.Quote;
+                return MarketEventType.NewQuote;
 
             return MarketEventType.Unknown;
         } 

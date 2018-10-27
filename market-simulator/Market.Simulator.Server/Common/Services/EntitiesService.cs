@@ -24,7 +24,9 @@ namespace Market.Simulator.Server.Common.Services
         {
             var entity = _context.Add(_mapper.Map<TEntity>(model));
             await _context.SaveAsync();
-            return _mapper.Map<TModel>(entity);
+            var result = _mapper.Map<TModel>(entity);
+            await PostAddAsync(result);
+            return result;
         }
 
         public async Task<TModel[]> GetAll()
@@ -53,8 +55,20 @@ namespace Market.Simulator.Server.Common.Services
             var entity = await _context.GetById<TEntity>(id);
             UpdateEntity(entity, model);
             await _context.SaveAsync();
+            await PostUpdateAsync(model);
+
         }
 
         protected abstract void UpdateEntity(TEntity entity, TModel model);
+
+        protected virtual Task PostAddAsync(TModel model)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task PostUpdateAsync(TModel model)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

@@ -1,12 +1,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Market.Simulator.Models.Companies;
+using Market.Simulator.Models.Publishing;
 using Market.Simulator.Server.Common;
-using Market.Simulator.Server.Common.Entities;
 using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Companies.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Market.Simulator.Server.Companies
 {
@@ -21,14 +19,27 @@ namespace Market.Simulator.Server.Companies
 
     public class CompaniesService : EntitiesService<Company, CompanyModel>, ICompaniesService
     {
-        public CompaniesService(IContext context, IMapper mapper)
+        private readonly IMarketEventPublisher _eventPublisher;
+
+        public CompaniesService(IContext context, IMapper mapper, IMarketEventPublisher eventPublisher)
             : base(context, mapper)
         {
+            _eventPublisher = eventPublisher;
         }
 
         protected override void UpdateEntity(Company entity, CompanyModel model)
         {
             entity.Name = model.Name;
+        }
+
+        protected override async Task PostAddAsync(CompanyModel model)
+        {
+            await _eventPublisher.Publish(model, MarketEventType.NewCompany);
+        }
+
+        protected override async Task PostUpdateAsync(CompanyModel model)
+        {
+            await _eventPublisher.Publish(model, MarketEventType.CompanyUpdate);
         }
     }
 }
