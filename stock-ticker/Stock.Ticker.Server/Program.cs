@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
 
-namespace Market.Simulator.Server
+namespace Stock.Ticker.Server
 {
     public class Program
     {
@@ -16,10 +16,9 @@ namespace Market.Simulator.Server
                 .UseSerilog((context, config) =>
                 {
                     config.MinimumLevel.Debug()
-                        .Enrich.FromLogContext()
                         .WriteTo.Console()
                         .WriteTo.ApplicationInsightsEvents("")
-                        .WriteTo.ApplicationInsightsTraces(""); 
+                        .WriteTo.ApplicationInsightsTraces("");
                 })
                 .UseStartup<Startup>();
     }

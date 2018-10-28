@@ -25,6 +25,12 @@ ProjectSection(SolutionItems) = preProject
 	properties.xml = properties.xml
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stock-ticker", "stock-ticker", "{397FEF25-84B9-476B-93E9-D316CCDD5F80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Ticker.Tests", "stock-ticker\Stock.Ticker.Tests\Stock.Ticker.Tests.csproj", "{330AEA87-EDE6-46AA-B526-43DF814284A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Ticker.Server", "stock-ticker\Stock.Ticker.Server\Stock.Ticker.Server.csproj", "{1A1B26D2-D4B1-4982-A37C-8A3892449286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +41,8 @@ Global
 		{EEAC8904-C7A7-4D74-8F27-8456497D97BA} = {CB55B0E5-981E-4D57-A5C4-4EDA5761F7FB}
 		{FDA05005-0BBF-403A-979C-12395912FA59} = {CB55B0E5-981E-4D57-A5C4-4EDA5761F7FB}
 		{85CB00B1-6A91-4F20-A9C1-25433F94F690} = {CB55B0E5-981E-4D57-A5C4-4EDA5761F7FB}
+		{330AEA87-EDE6-46AA-B526-43DF814284A8} = {397FEF25-84B9-476B-93E9-D316CCDD5F80}
+		{1A1B26D2-D4B1-4982-A37C-8A3892449286} = {397FEF25-84B9-476B-93E9-D316CCDD5F80}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{71D8B80B-9E05-4B83-8886-0E17C942CDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -53,5 +61,13 @@ Global
 		{85CB00B1-6A91-4F20-A9C1-25433F94F690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85CB00B1-6A91-4F20-A9C1-25433F94F690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85CB00B1-6A91-4F20-A9C1-25433F94F690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330AEA87-EDE6-46AA-B526-43DF814284A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330AEA87-EDE6-46AA-B526-43DF814284A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330AEA87-EDE6-46AA-B526-43DF814284A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330AEA87-EDE6-46AA-B526-43DF814284A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1B26D2-D4B1-4982-A37C-8A3892449286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1B26D2-D4B1-4982-A37C-8A3892449286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1B26D2-D4B1-4982-A37C-8A3892449286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1B26D2-D4B1-4982-A37C-8A3892449286}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

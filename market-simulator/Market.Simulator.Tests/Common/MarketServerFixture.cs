@@ -15,6 +15,12 @@ using Xunit;
 
 namespace Market.Simulator.Tests.Common
 {
+    [CollectionDefinition(Name)]
+    public class MarketServerCollection : ICollectionFixture<MarketServerFixture>
+    {
+        public const string Name = "MarketServer";
+    }
+
     public class MarketServerFixture : IDisposable
     {
         private const string ServerBaseUrl = "https://localhost:4000";
@@ -79,11 +85,5 @@ namespace Market.Simulator.Tests.Common
             foreach (var model in models)
                 await deleteMethod(model.Id);
         }
-    }
-
-    [CollectionDefinition(Name)]
-    public class MarketServerCollection : ICollectionFixture<MarketServerFixture>
-    {
-        public const string Name = "MarketServer";
     }
 }

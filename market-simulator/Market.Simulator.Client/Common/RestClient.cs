@@ -32,7 +32,7 @@ namespace Market.Simulator.Client.Common
         {
             using (var client = CreateClient())
             {
-                var response = await client.GetAsync(path).ConfigureAwait(false);
+                var response = await client.GetAsync(GetFullUrl(path)).ConfigureAwait(false);
                 var json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(json);
             }
@@ -42,7 +42,7 @@ namespace Market.Simulator.Client.Common
         {
             using (var client = CreateClient())
             {
-                return await client.PostAsync(path, new JsonContent<T>(model)).ConfigureAwait(false);
+                return await client.PostAsync(GetFullUrl(path), new JsonContent<T>(model)).ConfigureAwait(false);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Market.Simulator.Client.Common
         {
             using (var client = CreateClient())
             {
-                return await client.PutAsync(path, new JsonContent<T>(model)).ConfigureAwait(false);
+                return await client.PutAsync(GetFullUrl(path), new JsonContent<T>(model)).ConfigureAwait(false);
             }
         }
 
@@ -58,15 +58,20 @@ namespace Market.Simulator.Client.Common
         {
             using (var client = CreateClient())
             {
-                return await client.DeleteAsync(path);
+                return await client.DeleteAsync(GetFullUrl(path)).ConfigureAwait(false);
             }
         }
 
         private HttpClient CreateClient()
         {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _baseUrl;
-            return client;
+            return _httpClientFactory.CreateClient();
+        }
+
+        private string GetFullUrl(string path)
+        {
+            return _baseUrl.AbsoluteUri.EndsWith("/")
+                ? $"{_baseUrl.AbsoluteUri.TrimEnd('/')}{path}"
+                : $"{_baseUrl}{path}";
         }
     }
 }
