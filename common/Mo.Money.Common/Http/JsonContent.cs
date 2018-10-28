@@ -2,9 +2,9 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Market.Simulator.Client.Common
+namespace Mo.Money.Common.Http
 {
-    internal class JsonContent<T> : StringContent
+    public class JsonContent<T> : StringContent
     {
         public JsonContent(T model)
             : base(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json")

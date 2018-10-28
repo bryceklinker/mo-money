@@ -25,8 +25,8 @@ namespace Stock.Ticker.Server.Market
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var client = _marketClientFactory.Create();
-            var subscriptionUrl = $"{StockTickerBaseUrl}";
-            var response = await client.AddSubscriberAsync("StockTicker", subscriptionUrl);
+            var subscriptionUrl = $"{StockTickerBaseUrl}/market/incoming-events";
+            await client.AddSubscriberAsync("StockTicker", subscriptionUrl);
         }
     }
 }

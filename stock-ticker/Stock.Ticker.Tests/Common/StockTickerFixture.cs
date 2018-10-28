@@ -19,6 +19,7 @@ namespace Stock.Ticker.Tests.Common
         private readonly IWebHost _stockTickerServer;
 
         public FakeMarketServer MarketServer { get; }
+        public Uri StockTickerBaseUrl => new Uri(ServerBaseUrl);
 
         public StockTickerFixture()
         {
