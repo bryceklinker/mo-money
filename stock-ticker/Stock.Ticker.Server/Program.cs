@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Mo.Money.Common;
 using Serilog;
 
 namespace Stock.Ticker.Server
@@ -13,13 +14,7 @@ namespace Stock.Ticker.Server
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseSerilog((context, config) =>
-                {
-                    config.MinimumLevel.Debug()
-                        .WriteTo.Console()
-                        .WriteTo.ApplicationInsightsEvents("")
-                        .WriteTo.ApplicationInsightsTraces("");
-                })
+                .ConfigureForMoMoney()
                 .UseStartup<Startup>();
     }
 }

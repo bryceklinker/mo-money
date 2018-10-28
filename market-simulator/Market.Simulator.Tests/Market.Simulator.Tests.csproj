@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="../../properties.xml" />
+    <Import Project="../../logging.xml" />
     <Import Project="../../webapp.xml" />
     <Import Project="../../testing.xml" />
     

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Mo.Money.Common;
 using Serilog;
 
 namespace Market.Simulator.Server
@@ -13,14 +14,7 @@ namespace Market.Simulator.Server
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseSerilog((context, config) =>
-                {
-                    config.MinimumLevel.Debug()
-                        .Enrich.FromLogContext()
-                        .WriteTo.Console()
-                        .WriteTo.ApplicationInsightsEvents("")
-                        .WriteTo.ApplicationInsightsTraces(""); 
-                })
+                .ConfigureForMoMoney()
                 .UseStartup<Startup>();
     }
 }

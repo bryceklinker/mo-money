@@ -7,6 +7,7 @@ using Market.Simulator.Models.Publishing;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Mo.Money.Common;
 
 namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber
 {
@@ -27,6 +28,7 @@ namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber
             _host = WebHost.CreateDefaultBuilder<FakeMarketSubscriberStartup>(Array.Empty<string>())
                 .ConfigureServices(services => services.AddSingleton(this))
                 .UseUrls(BaseUrl.AbsoluteUri)
+                .ConfigureForMoMoney()
                 .Build();
 
             _host.StartAsync();

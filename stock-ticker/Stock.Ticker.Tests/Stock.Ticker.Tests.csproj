@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <Import Project="../../properties.xml" />
+    <Import Project="../../logging.xml" />
     <Import Project="../../webapp.xml" />
     <Import Project="../../testing.xml" />
     <PropertyGroup>
@@ -13,6 +14,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\..\common\Mo.Money.Common\Mo.Money.Common.csproj" />
       <ProjectReference Include="..\..\market-simulator\Market.Simulator.Models\Market.Simulator.Models.csproj" />
       <ProjectReference Include="..\Stock.Ticker.Server\Stock.Ticker.Server.csproj" />
     </ItemGroup>
