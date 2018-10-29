@@ -23,7 +23,7 @@ namespace Market.Simulator.Tests.Common
 
     public class MarketServerFixture : IDisposable
     {
-        private const string ServerBaseUrl = "https://localhost:4000";
+        private const string ServerBaseUrl = "https://localhost:6000";
         private readonly IWebHost _simulatorServer;
         private readonly List<FakeMarketSubscriber> _fakeSubscribers;
 

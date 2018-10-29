@@ -15,7 +15,7 @@ namespace Stock.Ticker.Tests.Common
     
     public class StockTickerFixture : IDisposable
     {
-        private const string ServerBaseUrl = "https://localhost:4500";
+        private const string ServerBaseUrl = "https://localhost:6200";
         private readonly IWebHost _stockTickerServer;
 
         public FakeMarketServer MarketServer { get; }

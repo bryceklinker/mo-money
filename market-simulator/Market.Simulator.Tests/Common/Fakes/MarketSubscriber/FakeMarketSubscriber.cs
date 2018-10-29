@@ -13,7 +13,7 @@ namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber
 {
     public class FakeMarketSubscriber : IDisposable
     {
-        public const int DefaultPort = 4100;
+        public const int DefaultPort = 6100;
         private readonly int _port;
         private readonly IWebHost _host;
         private readonly ConcurrentBag<MarketEventModel> _marketEvents;

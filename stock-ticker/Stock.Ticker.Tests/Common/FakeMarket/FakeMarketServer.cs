@@ -18,7 +18,7 @@ namespace Stock.Ticker.Tests.Common.FakeMarket
     public class FakeMarketServer : IDisposable
     {
         private readonly int _port;
-        public const int DefaultPort = 4600;
+        public const int DefaultPort = 6300;
         private readonly IWebHost _server;
         private readonly ConcurrentBag<SubscriberModel> _subscribers;
         private readonly IHttpClientFactory _httpClientFactory;
