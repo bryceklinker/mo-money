@@ -1,7 +1,9 @@
 ﻿using System;
+using Identity.Management.Server.ApiResources;
+using Identity.Management.Server.Clients;
 using Identity.Management.Server.Common;
+using Identity.Management.Server.Users;
 using Identity.Management.Server.Users.Entities;
-using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +18,9 @@ namespace Identity.Management.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IInitializer, ClientsInitializer>();
+            services.AddTransient<IInitializer, ApiResourcesInitializer>();
+            services.AddTransient<IInitializer, UsersInitializer>();
             services.AddDbContext<MoMoneyIdentityContext>(o => o.UseInMemoryDatabase("MoMoneyContext"));
             services.AddIdentity<MoMoneyUser, MoMoneyRole>()
                 .AddEntityFrameworkStores<MoMoneyIdentityContext>()
@@ -38,7 +43,7 @@ namespace Identity.Management.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            IdentityInitializer.InitializerDatabase(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>());
+            InitializeIdentities(app.ApplicationServices);
             
             if (env.IsDevelopment())
             {
@@ -46,6 +51,15 @@ namespace Identity.Management.Server
             }
 
             app.UseIdentityServer();
+        }
+
+        private void InitializeIdentities(IServiceProvider serviceProvider)
+        {
+            var initializers = serviceProvider.GetServices<IInitializer>();
+            foreach (var initializer in initializers)
+            {
+                initializer.Initialize();
+            }
         }
     }
 }

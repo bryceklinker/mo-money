@@ -6,7 +6,7 @@ namespace Identity.Management.Server.Common
 {
     public class MoMoneyIdentityContext : IdentityDbContext<MoMoneyUser, MoMoneyRole, string>
     {
-        public MoMoneyIdentityContext(DbContextOptions options)
+        public MoMoneyIdentityContext(DbContextOptions<MoMoneyIdentityContext> options)
             : base(options)
         {
             
