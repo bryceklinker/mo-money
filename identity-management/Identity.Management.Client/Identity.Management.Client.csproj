@@ -8,10 +8,4 @@
     <ItemGroup>
       <ProjectReference Include="..\..\common\Mo.Money.Common\Mo.Money.Common.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="IdentityServer4.EntityFramework, Version=2.1.1.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\.nuget\packages\identityserver4.entityframework\2.1.1\lib\netstandard2.0\IdentityServer4.EntityFramework.dll</HintPath>
-      </Reference>
-    </ItemGroup>
 </Project>

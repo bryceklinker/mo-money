@@ -3,7 +3,7 @@ using Mo.Money.Common.Http;
 
 namespace Identity.Management.Client
 {
-    public class IdentityManagementClientConfig
+    internal class IdentityManagementClientConfig
     {
         public Uri AuthorityUrl { get; }
         public string ClientId { get; }

@@ -39,14 +39,14 @@ namespace Identity.Management.Server.Clients
         public async Task<ClientModel[]> GetAllAsync()
         {
             return await _context.Set<IdentityServer4.EntityFramework.Entities.Client>()
-                .Select(ClientModel.FromEntityExpression)
+                .Select(ClientModelMappers.FromEntityExpression)
                 .ToArrayAsync();
         }
 
         public async Task<ClientModel> GetByIdAsync(string id)
         {
             return await _context.Set<IdentityServer4.EntityFramework.Entities.Client>()
-                .Select(ClientModel.FromEntityExpression)
+                .Select(ClientModelMappers.FromEntityExpression)
                 .SingleOrDefaultAsync(c => c.ClientId == id);
         }
 
