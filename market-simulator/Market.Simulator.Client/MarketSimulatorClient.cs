@@ -2,10 +2,11 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Market.Simulator.Client.Common;
 using Market.Simulator.Models.Companies;
 using Market.Simulator.Models.Subscribers;
 using Microsoft.Extensions.DependencyInjection;
+using Mo.Money.Common;
+using Mo.Money.Common.Http;
 using Newtonsoft.Json;
 
 namespace Market.Simulator.Client
@@ -32,7 +33,7 @@ namespace Market.Simulator.Client
         public async Task<long> AddSubscriberAsync(SubscriberModel subscriberModel)
         {
             var response = await _client.PostAsync("/subscribers", subscriberModel).ConfigureAwait(false);
-            return long.TryParse(response.Headers.Location.Segments.Last(), out var id)
+            return long.TryParse(response.GetIdFromLocationHeader(), out var id)
                 ? id
                 : default(long);
         }
@@ -65,7 +66,7 @@ namespace Market.Simulator.Client
         public async Task<long> AddCompanyAsync(CompanyModel model)
         {
             var response = await _client.PostAsync("/companies", model);
-            return long.TryParse(response.Headers.Location.Segments.Last(), out var id)
+            return long.TryParse(response.GetIdFromLocationHeader(), out var id)
                 ? id
                 : default(long);
         }

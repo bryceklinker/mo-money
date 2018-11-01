@@ -1,5 +1,9 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Identity.Management.Client;
 using Identity.Management.Server;
+using Identity.Management.Server.Clients;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 
@@ -10,9 +14,10 @@ namespace Identity.Management.Tests.Common
     {
         public const string Name = "IdentityManagement";
     }
-    
+
     public class IdentityManagementFixture : IDisposable
     {
+        private const string IdentityClientSecret = "Mo.Money.Identity.Secret";
         private const string ServerBaseUrl = "https://localhost:6400";
         private readonly IWebHost _identityManagementServer;
 
@@ -27,6 +32,22 @@ namespace Identity.Management.Tests.Common
             _identityManagementServer.StartAsync();
         }
 
+        public IdentityManagementClient CreateClient()
+        {
+            var clientId = DefaultClientsConfig.IdentityClient.ClientId;
+            return new IdentityManagementClient(IdentityBaseUrl, clientId, IdentityClientSecret);
+        }
+
+        public void ResetData()
+        {
+            var client = CreateClient();
+            var clients = client.GetClientsAsync().Result;
+            foreach (var clientModel in clients.Where(c => c.ClientId != DefaultClientsConfig.IdentityClient.ClientId))
+            {
+                client.DeleteClientAsync(clientModel.ClientId).Wait();
+            }
+        }
+        
         public void Dispose()
         {
             _identityManagementServer?.Dispose();

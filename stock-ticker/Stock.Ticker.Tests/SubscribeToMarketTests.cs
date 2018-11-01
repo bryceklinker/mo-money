@@ -11,7 +11,7 @@ using Xunit.Sdk;
 namespace Stock.Ticker.Tests
 {
     [Collection(StockTickerCollection.Name)]
-    public class SubscribeToMarketTests : IDisposable
+    public class SubscribeToMarketTests
     {
         private readonly StockTickerFixture _fixture;
         private readonly FakeMarketServer _fakeMarketServer;
@@ -48,11 +48,6 @@ namespace Stock.Ticker.Tests
             Assert.Equal(expected.Id, quote.Id);
             Assert.Equal(expected.Price, quote.Price);
             Assert.Equal(expected.Timestamp, quote.Timestamp);
-        }
-
-        public void Dispose()
-        {
-            _fakeMarketServer?.Dispose();
         }
     }
 }

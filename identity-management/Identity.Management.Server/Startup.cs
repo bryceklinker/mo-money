@@ -1,23 +1,39 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using AutoMapper;
 using Identity.Management.Server.ApiResources;
 using Identity.Management.Server.Clients;
 using Identity.Management.Server.Common;
 using Identity.Management.Server.Users;
 using Identity.Management.Server.Users.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Identity.Management.Server
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private readonly string _authorityUrl;
+
+        public Startup(IConfiguration configuration)
+        {
+            _authorityUrl = configuration.GetValue<string>("urls").Split(';')
+                .First(u => new Uri(u).Scheme == "https");
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            
+            services.AddAutoMapper(config => config.AddProfiles(typeof(Startup).Assembly));
+            services.AddTransient<IClientsService, ClientsService>();
             services.AddTransient<IInitializer, ClientsInitializer>();
             services.AddTransient<IInitializer, ApiResourcesInitializer>();
             services.AddTransient<IInitializer, UsersInitializer>();
@@ -25,6 +41,17 @@ namespace Identity.Management.Server
             services.AddIdentity<MoMoneyUser, MoMoneyRole>()
                 .AddEntityFrameworkStores<MoMoneyIdentityContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = _authorityUrl;
+                options.Audience = DefaultApiResourcesConfig.IdentityApiResource.Name;
+                options.RequireHttpsMetadata = false;
+            });
             
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
@@ -37,10 +64,8 @@ namespace Identity.Management.Server
                 {
                     o.ConfigureDbContext = dbOptionsBuilder => dbOptionsBuilder.UseInMemoryDatabase("MoMoneyOperational");
                 });
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             InitializeIdentities(app.ApplicationServices);
@@ -50,7 +75,9 @@ namespace Identity.Management.Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseIdentityServer();
+            app.UseIdentityServer()
+                .UseAuthentication()
+                .UseMvc();
         }
 
         private void InitializeIdentities(IServiceProvider serviceProvider)

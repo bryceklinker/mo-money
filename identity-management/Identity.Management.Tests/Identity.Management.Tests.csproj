@@ -11,6 +11,7 @@
     </PropertyGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\Identity.Management.Client\Identity.Management.Client.csproj" />
       <ProjectReference Include="..\Identity.Management.Server\Identity.Management.Server.csproj" />
     </ItemGroup>
 

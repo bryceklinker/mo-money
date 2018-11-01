@@ -1,32 +1,32 @@
 using System.Net;
 using System.Threading.Tasks;
-using Identity.Management.Server.Clients;
+using Identity.Management.Client;
 using Identity.Management.Server.Users;
 using Identity.Management.Tests.Common;
-using IdentityModel.Client;
 using Xunit;
 
 namespace Identity.Management.Tests
 {
     [Collection(IdentityManagementCollection.Name)]
-    public class DefaultUsersTests
+    public class AdminUserTests
     {
-        private readonly TokenClient _client;
+        private const string AdminPassword = DefaultUsersConfig.AdminPassword;
+        private static readonly string AdminUserName = DefaultUsersConfig.AdminUser.UserName;
         private readonly string _identityBaseUrl;
+        private readonly IdentityManagementClient _client;
 
-        public DefaultUsersTests(IdentityManagementFixture fixture)
+        public AdminUserTests(IdentityManagementFixture fixture)
         {
-            var clientId = DefaultClientsConfig.IdentityClient.ClientId;
+            fixture.ResetData();
+            
             _identityBaseUrl = fixture.IdentityBaseUrl.AbsoluteUri;
-            _client = new TokenClient($"{_identityBaseUrl}connect/token", clientId, "Mo.Money.Identity.Secret");
+            _client = fixture.CreateClient();
         }
         
         [Fact]
         public async Task ShouldAllowLoginUsingDefaultAdminUser()
         {
-            var username = DefaultUsersConfig.AdminUser.UserName;
-            var password = DefaultUsersConfig.AdminPassword;
-            var response = await _client.RequestResourceOwnerPasswordAsync(username, password);
+            var response = await _client.GetUserAccessTokenAsync(AdminUserName, AdminPassword);
             
             Assert.Equal(HttpStatusCode.OK, response.HttpStatusCode);
             await JwtTokenAssert.IsValidAsync(response.AccessToken, _identityBaseUrl);
