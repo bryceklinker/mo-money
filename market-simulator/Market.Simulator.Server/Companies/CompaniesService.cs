@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using Market.Simulator.Models.Companies;
-using Market.Simulator.Models.Publishing;
+using Market.Simulator.Client.Companies;
+using Market.Simulator.Client.Publishing;
 using Market.Simulator.Server.Common;
 using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Companies.Entities;

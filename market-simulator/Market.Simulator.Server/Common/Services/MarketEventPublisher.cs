@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Market.Simulator.Models.Publishing;
+using Market.Simulator.Client.Publishing;
 using Market.Simulator.Server.Subscribers.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

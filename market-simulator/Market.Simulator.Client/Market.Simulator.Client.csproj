@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\common\Mo.Money.Common\Mo.Money.Common.csproj" />
-      <ProjectReference Include="..\Market.Simulator.Models\Market.Simulator.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>

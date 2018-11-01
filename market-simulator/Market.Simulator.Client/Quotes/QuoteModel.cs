@@ -1,7 +1,7 @@
 using System;
-using Market.Simulator.Models.Common;
+using Market.Simulator.Client.Common;
 
-namespace Market.Simulator.Models.Quotes
+namespace Market.Simulator.Client.Quotes
 {
     public class QuoteModel: IModel
     {

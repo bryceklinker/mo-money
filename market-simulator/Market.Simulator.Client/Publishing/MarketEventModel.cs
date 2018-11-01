@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Market.Simulator.Models.Publishing
+namespace Market.Simulator.Client.Publishing
 {
     public class MarketEventModel
     {

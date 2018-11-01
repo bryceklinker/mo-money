@@ -12,10 +12,5 @@ namespace Identity.Management.Server.Users
             TwoFactorEnabled = false,
             UserName = "Admin"
         };
-
-        public static readonly MoMoneyUser[] AllUsers =
-        {
-            AdminUser
-        };
     }
 }

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Market.Simulator.Models.Common;
+using Market.Simulator.Client.Common;
 using Market.Simulator.Server.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 

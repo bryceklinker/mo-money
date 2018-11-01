@@ -1,5 +1,5 @@
 using AutoMapper;
-using Market.Simulator.Models.Quotes;
+using Market.Simulator.Client.Quotes;
 using Market.Simulator.Server.Quotes.Entities;
 
 namespace Market.Simulator.Server.Quotes

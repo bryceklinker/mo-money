@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Market.Simulator.Models.Companies;
+using Market.Simulator.Client.Companies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Simulator.Server.Companies

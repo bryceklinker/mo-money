@@ -1,4 +1,4 @@
-using Market.Simulator.Models.Publishing;
+using Market.Simulator.Client.Publishing;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Simulator.Tests.Common.Fakes.MarketSubscriber

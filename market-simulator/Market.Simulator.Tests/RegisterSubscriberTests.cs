@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Market.Simulator.Client;
-using Market.Simulator.Models.Subscribers;
+using Market.Simulator.Client.Subscribers;
 using Market.Simulator.Tests.Common;
 using Xunit;
 

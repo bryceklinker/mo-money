@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Market.Simulator.Models.Quotes;
+using Market.Simulator.Client.Quotes;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Stock.Ticker.Tests.Common;

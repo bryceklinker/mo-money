@@ -1,4 +1,4 @@
-using Market.Simulator.Models.Subscribers;
+using Market.Simulator.Client.Subscribers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Stock.Ticker.Tests.Common.FakeMarket

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Market.Simulator.Models.Publishing;
-using Market.Simulator.Models.Quotes;
+using Market.Simulator.Client.Publishing;
+using Market.Simulator.Client.Quotes;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Stock.Ticker.Server.Quotes

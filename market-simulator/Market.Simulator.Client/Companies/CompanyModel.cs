@@ -1,6 +1,6 @@
-using Market.Simulator.Models.Common;
+using Market.Simulator.Client.Common;
 
-namespace Market.Simulator.Models.Companies
+namespace Market.Simulator.Client.Companies
 {
     public class CompanyModel : IModel
     {

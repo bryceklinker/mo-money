@@ -16,7 +16,6 @@
     
     <ItemGroup>
       <ProjectReference Include="..\..\common\Mo.Money.Common\Mo.Money.Common.csproj" />
-      <ProjectReference Include="..\..\market-simulator\Market.Simulator.Models\Market.Simulator.Models.csproj" />
       <ProjectReference Include="..\Stock.Ticker.Server\Stock.Ticker.Server.csproj" />
     </ItemGroup>
     <ItemGroup>

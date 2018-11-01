@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Market.Simulator.Client;
-using Market.Simulator.Models.Companies;
-using Market.Simulator.Models.Publishing;
+using Market.Simulator.Client.Companies;
+using Market.Simulator.Client.Publishing;
 using Market.Simulator.Tests.Common;
 using Market.Simulator.Tests.Common.Fakes.MarketSubscriber;
 using Xunit;

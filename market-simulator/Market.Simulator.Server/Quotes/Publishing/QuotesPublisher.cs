@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Market.Simulator.Models.Quotes;
+using Market.Simulator.Client.Quotes;
 using Market.Simulator.Server.Common;
 using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Quotes.Services;

@@ -1,6 +1,6 @@
 using System;
 
-namespace Market.Simulator.Models.Publishing
+namespace Market.Simulator.Client.Publishing
 {
     public class MetadataModel
     {

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using Market.Simulator.Models.Subscribers;
+using Market.Simulator.Client.Subscribers;
 using Market.Simulator.Server.Common;
 using Market.Simulator.Server.Common.Services;
 using Market.Simulator.Server.Subscribers.Entities;

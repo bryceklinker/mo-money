@@ -1,6 +1,6 @@
-using Market.Simulator.Models.Common;
+using Market.Simulator.Client.Common;
 
-namespace Market.Simulator.Models.Subscribers
+namespace Market.Simulator.Client.Subscribers
 {
     public class SubscriberModel : IModel
     {

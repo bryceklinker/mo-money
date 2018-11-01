@@ -1,5 +1,5 @@
 using AutoMapper;
-using Market.Simulator.Models.Subscribers;
+using Market.Simulator.Client.Subscribers;
 using Market.Simulator.Server.Subscribers.Entities;
 
 namespace Market.Simulator.Server.Subscribers

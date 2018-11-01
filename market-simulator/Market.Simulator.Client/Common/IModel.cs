@@ -1,4 +1,4 @@
-namespace Market.Simulator.Models.Common
+namespace Market.Simulator.Client.Common
 {
     public interface IModel
     {
