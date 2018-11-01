@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Identity.Management.Client;
 using Identity.Management.Server;
+using Identity.Management.Server.ApiResources;
 using Identity.Management.Server.Clients;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
@@ -40,17 +41,29 @@ namespace Identity.Management.Tests.Common
 
         public void ResetData()
         {
-            var client = CreateClient();
-            var clients = client.GetClientsAsync().Result;
-            foreach (var clientModel in clients.Where(c => c.ClientId != DefaultClientsConfig.IdentityClient.ClientId))
-            {
-                client.DeleteClientAsync(clientModel.ClientId).Wait();
-            }
+            DeleteClients().Wait();
+            DeleteApiResources().Wait();
         }
-        
+
         public void Dispose()
         {
             _identityManagementServer?.Dispose();
+        }
+
+        private async Task DeleteClients()
+        {
+            var client = CreateClient();
+            var models = await client.GetClientsAsync();
+            foreach (var model in models.Where(c => c.ClientId != DefaultClientsConfig.IdentityClient.ClientId))
+                await client.DeleteClientAsync(model.ClientId);
+        }
+
+        private async Task DeleteApiResources()
+        {
+            var client = CreateClient();
+            var models = await client.GetApiResourcesAsync();
+            foreach (var model in models.Where(c => c.Name != DefaultApiResourcesConfig.IdentityApiResource.Name))
+                await client.DeleteApiResourceAsync(model.Name);
         }
     }
 }

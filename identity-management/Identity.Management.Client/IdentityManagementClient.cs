@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Identity.Management.Client.ApiResources;
 using Identity.Management.Client.Clients;
 using IdentityModel.Client;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +59,27 @@ namespace Identity.Management.Client
         public async Task DeleteClientAsync(string id)
         {
             await _restClient.DeleteAsync($"/clients/{id}");
+        }
+
+        public async Task<string> AddApiResourceAsync(ApiResourceModel model)
+        {
+            var response = await _restClient.PostAsync("/api-resources", model);
+            return response.GetIdFromLocationHeader();
+        }
+
+        public async Task<ApiResourceModel[]> GetApiResourcesAsync()
+        {
+            return await _restClient.GetAsync<ApiResourceModel[]>("/api-resources");
+        }
+
+        public async Task<ApiResourceModel> GetApiResourceAsync(string id)
+        {
+            return await _restClient.GetAsync<ApiResourceModel>($"/api-resources/{id}");
+        }
+
+        public async Task DeleteApiResourceAsync(string id)
+        {
+            await _restClient.DeleteAsync($"/api-resources/{id}");
         }
     }
 }

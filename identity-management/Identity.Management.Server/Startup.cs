@@ -34,6 +34,7 @@ namespace Identity.Management.Server
             
             services.AddAutoMapper(config => config.AddProfiles(typeof(Startup).Assembly));
             services.AddTransient<IClientsService, ClientsService>();
+            services.AddTransient<IApiResourcesService, ApiResourcesService>();
             services.AddTransient<IInitializer, ClientsInitializer>();
             services.AddTransient<IInitializer, ApiResourcesInitializer>();
             services.AddTransient<IInitializer, UsersInitializer>();
