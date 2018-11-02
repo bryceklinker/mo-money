@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Mo.Money.EndToEnd.Application
+namespace EndToEnd.Application
 {
     public class Applications
     {

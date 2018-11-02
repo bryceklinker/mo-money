@@ -46,7 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "portal", "portal", "{826793
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "end-to-end", "end-to-end", "{77709B29-2133-4041-AB36-4264F61EE809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mo.Money.EndToEnd", "end-to-end\Mo.Money.EndToEnd\Mo.Money.EndToEnd.csproj", "{65063989-3CFD-4243-A80F-4D9E2C4548F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndToEnd", "end-to-end\EndToEnd\EndToEnd.csproj", "{65063989-3CFD-4243-A80F-4D9E2C4548F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Server", "portal\Portal.Server\Portal.Server.csproj", "{B29D66C2-3826-4BA7-83FA-9253A607E2DA}"
 EndProject

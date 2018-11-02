@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Mo.Money.EndToEnd.Application;
-using Mo.Money.EndToEnd.Common;
+using EndToEnd.Application;
+using EndToEnd.Common;
 using Serilog;
 
-namespace Mo.Money.EndToEnd
+namespace EndToEnd
 {
     class Program
     {

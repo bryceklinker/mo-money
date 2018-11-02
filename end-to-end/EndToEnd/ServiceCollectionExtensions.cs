@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using Mo.Money.EndToEnd.Application;
+using EndToEnd.Application;
 using Serilog;
 
-namespace Mo.Money.EndToEnd
+namespace EndToEnd
 {
     public static class ServiceCollectionExtensions
     {

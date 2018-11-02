@@ -1,4 +1,4 @@
-namespace Mo.Money.EndToEnd.Application
+namespace EndToEnd.Application
 {
     public class ApplicationModel
     {

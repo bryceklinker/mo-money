@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Mo.Money.EndToEnd.Application
+namespace EndToEnd.Application
 {
     public class ApplicationManager
     {

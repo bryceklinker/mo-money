@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Mo.Money.EndToEnd.Common;
+using EndToEnd.Common;
 
-namespace Mo.Money.EndToEnd.Application
+namespace EndToEnd.Application
 {
     public class ApplicationServer
     {

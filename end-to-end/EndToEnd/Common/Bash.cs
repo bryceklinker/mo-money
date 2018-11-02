@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 
-namespace Mo.Money.EndToEnd.Common
+namespace EndToEnd.Common
 {
     public static class Bash
     {
