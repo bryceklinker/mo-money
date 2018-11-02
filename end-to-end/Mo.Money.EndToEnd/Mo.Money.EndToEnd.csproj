@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../../properties.xml" />
+    <Import Project="../../logging.xml" />
+    
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <LangVersion>Latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="node_modules\**" />
+    </ItemGroup>
+
+</Project>

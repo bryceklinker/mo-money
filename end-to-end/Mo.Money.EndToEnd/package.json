@@ -1,0 +1,14 @@
+{
+  "name": "Mo.Money.EndToEnd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "open": "cypress open",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "3.1.0",
+    "typescript": "3.1.6"
+  }
+}

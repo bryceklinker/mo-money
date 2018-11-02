@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Mo.Money.Common;
-using Serilog;
 
-namespace Market.Simulator.Server
+namespace Portal.Server
 {
     public class Program
     {

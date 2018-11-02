@@ -7,3 +7,4 @@
 **/[Cc]overage/
 **/.DS_Store
 **/*.user
+**/node_modules/

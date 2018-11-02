@@ -13,7 +13,7 @@ namespace Identity.Management.Server
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureForMoMoney()
+                .ConfigureForMoMoney(commandLineArgs: args)
                 .UseStartup<Startup>();
     }
 }
