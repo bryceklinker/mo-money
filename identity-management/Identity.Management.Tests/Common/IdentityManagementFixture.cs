@@ -5,6 +5,7 @@ using Identity.Management.Client;
 using Identity.Management.Server;
 using Identity.Management.Server.ApiResources;
 using Identity.Management.Server.Clients;
+using Identity.Management.Server.Users;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 
@@ -43,6 +44,7 @@ namespace Identity.Management.Tests.Common
         {
             DeleteClients().Wait();
             DeleteApiResources().Wait();
+            DeleteUsers().Wait();
         }
 
         public void Dispose()
@@ -64,6 +66,14 @@ namespace Identity.Management.Tests.Common
             var models = await client.GetApiResourcesAsync();
             foreach (var model in models.Where(c => c.Name != DefaultApiResourcesConfig.IdentityApiResource.Name))
                 await client.DeleteApiResourceAsync(model.Name);
+        }
+
+        private async Task DeleteUsers()
+        {
+            var client = CreateClient();
+            var models = await client.GetUsersAsync();
+            foreach (var model in models.Where(u => u.UserName != DefaultUsersConfig.AdminUser.UserName))
+                await client.DeleteUserAsync(model.Id);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Identity.Management.Client.ApiResources;
 using Identity.Management.Client.Clients;
+using Identity.Management.Client.Users;
 using IdentityModel.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Mo.Money.Common;
@@ -80,6 +81,27 @@ namespace Identity.Management.Client
         public async Task DeleteApiResourceAsync(string id)
         {
             await _restClient.DeleteAsync($"/api-resources/{id}");
+        }
+
+        public async Task<string> AddUserAsync(UserModel model)
+        {
+            var response = await _restClient.PostAsync("/users", model);
+            return response.GetIdFromLocationHeader();
+        }
+
+        public async Task<UserModel[]> GetUsersAsync()
+        {
+            return await _restClient.GetAsync<UserModel[]>("/users");
+        }
+
+        public async Task DeleteUserAsync(string id)
+        {
+            await _restClient.DeleteAsync($"/users/{id}");
+        }
+
+        public async Task<UserModel> GetUserByIdAsync(string id)
+        {
+            return await _restClient.GetAsync<UserModel>($"/users/{id}");
         }
     }
 }

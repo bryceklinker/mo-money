@@ -10,7 +10,9 @@ namespace Identity.Management.Server.Users
             Email = "admin@momoney.com",
             EmailConfirmed = true,
             TwoFactorEnabled = false,
-            UserName = "Admin"
+            UserName = "Admin",
+            FirstName = "Big",
+            LastName = "Red"
         };
     }
 }
